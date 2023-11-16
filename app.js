@@ -1,9 +1,9 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 8080;
 const fs = require('fs');
 
-app.get("/", (req, res) => res.type('text').send(fs.readFileSync("database.csv")));
+app.get("/database.csv", (req, res) => res.type('text').send(fs.readFileSync("database.csv")));
 
 const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
