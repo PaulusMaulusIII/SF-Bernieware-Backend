@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 3001;
 const fs = require('fs');
 
 app.get("/database.csv", (req, res) => res.type('text').send(fs.readFileSync("database.csv")));
