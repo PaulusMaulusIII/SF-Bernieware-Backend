@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => {
             let categories = fs.readdirSync("Kategorien");
             console.log(categories);
             try {
-                categories = categories.map(element => element.replaceAll("-ae-", "ä").replaceAll("-ue-", "ü").replaceAll("-oe-", "ö").replaceAll("-sz-", "ß"));
+                categories = categories.map(element => element.replace("-ae-", "ä").replace("-ue-", "ü").replace("-oe-", "ö").replace("-sz-", "ß"));
             } catch (error) {
                 console.log(error);
             }
