@@ -41,6 +41,12 @@ const server = http.createServer((req, res) => {
                 res.writeHead(404, "Not Found");
                 res.end();
             }
+        } else if (req.url === "/orderDate") {
+            let orderTime = new Date;
+            orderTime = fs.readFileSync("order.time");
+
+            res.writeHead(200, { "Content-Type": "text" });
+            res.end(orderTime.toString());
         } else {
             res.writeHead(404, "Not Found");
             res.end();
@@ -107,7 +113,7 @@ wss.on("connection", (ws) => { //Wenn ein nutzer sich verbindet
                         if (sizeDiff > 0) { // falls die neue datei mehr zeilen hat als die alte //FIXME: When there are additions AND changes the handler notes the changes as additions
                             fileContent = fileContent.split("\n");
                             let addedContent = content.split("\n").filter(element => !fileContent.includes(element)); //Gibt uns nur die Zeilen die NICHT in der alten version vorhanden sind
-                            addedContent = addedContent.map(element => [content[(content.split("\n").indexOf(element)-1)].split("\t")[0], element]); //ERgänzt die zeile, in der die änderungen vorkommmen
+                            addedContent = addedContent.map(element => [content[(content.split("\n").indexOf(element) - 1)].split("\t")[0], element]); //ERgänzt die zeile, in der die änderungen vorkommmen
                             clients.forEach((client) => { //Sende an jeden client
                                 client.send(JSON.stringify({ successful: true, method: "ADD", data: addedContent })); //Erfolgreich, "neuer Inhalt", Inhalt
                                 console.log(`Updated Client listening for changes to ${file}\n Added ${addedContent}`);
