@@ -42,11 +42,11 @@ const server = http.createServer((req, res) => {
                 res.end();
             }
         } else if (req.url === "/orderDate") {
-            let orderTime = new Date;
+            let orderTime = new Date();
             orderTime = fs.readFileSync("order.time");
 
             res.writeHead(200, { "Content-Type": "text" });
-            res.end(orderTime.toString());
+            res.end(orderTime.getTime());
         } else {
             res.writeHead(404, "Not Found");
             res.end();
