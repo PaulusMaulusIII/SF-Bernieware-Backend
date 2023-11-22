@@ -38,15 +38,15 @@ const server = http.createServer((req, res) => {
                 res.writeHead(200, { "Content-Type": "image/jpeg" });
                 res.end(img);
             } else {
-                res.writeHead(404, {"Content-Type":"text/plain"});
+                res.writeHead(404, { "Content-Type": "text/plain" });
                 res.end("Not Found");
             }
         } else if (req.url === "/orderDate") {
             res.writeHead(200, { "Content-Type": "text" });
             res.end(fs.readFileSync("order.time"));
         } else {
-            res.writeHead(404, "Not Found");
-            res.end();
+            res.writeHead(404, { "Content-Type": "text/plan" });
+            res.end("Not Found");
         }
     } else if (req.method === "POST" && req.url === "/submit") { //Wenn eine Bestellung gespeichert werden soll
         let body = "";
